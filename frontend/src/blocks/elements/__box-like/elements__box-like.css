@@ -1,0 +1,8 @@
+.elements__box-like {
+    margin: 22px 20px 22px 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

@@ -1,0 +1,16 @@
+.elements__list {
+    margin: 48px 0 67px;
+    padding: 0;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 282px);
+    justify-content: center;
+    gap: 20px 17px;
+    list-style: none;
+}
+
+@media screen and (max-width: 426px) {
+    .elements__list {
+        margin: 36px 0 48px;
+  } 
+}

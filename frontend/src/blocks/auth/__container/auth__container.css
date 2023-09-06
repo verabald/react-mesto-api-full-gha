@@ -1,0 +1,16 @@
+.auth__container {
+  width: 358px;
+  min-height: 363px;
+  margin: auto;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: #000000;
+}
+
+@media screen and (max-width: 769px) {
+  .auth__container {
+    min-width: 260px;
+  }
+}

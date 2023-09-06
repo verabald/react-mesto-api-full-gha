@@ -1,0 +1,23 @@
+.section {
+    max-width: calc(100% - 200px*2);
+    margin: 0 auto;
+    padding: 0;
+}
+
+@media screen and (max-width: 1100px) {
+    .section  {
+        max-width: calc(100% - 100px*2);
+    }
+  } 
+
+@media screen and (max-width: 780px) {
+    .section  {
+        max-width: calc(100% - 50px*2);
+    }
+  } 
+
+@media screen and (max-width: 680px) {
+    .section  {
+        max-width: calc(100% - 20px*2);
+    }
+  } 
