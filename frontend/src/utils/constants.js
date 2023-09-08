@@ -7,7 +7,7 @@ const validationConfig = {
 };
 
 const apiOptions = {
-        url: 'https://mesto.nomoreparties.co/v1/cohort-66',
+        url: 'https://backend.verbaldi.nomoredomainsicu.ru',
         headers: {
           authorization: '4e14d5ac-b5a8-4129-9bd2-ef7c1e4423e4',
           'Content-Type': 'application/json'
