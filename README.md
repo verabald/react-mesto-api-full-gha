@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.39.138
+IP-адрес 158.160.46.145
 
-Frontend https://...
+Frontend https://project.verbaldi.nomoredomainsicu.ru
 
-Backend https://...
+Backend https://backend.verbaldi.nomoredomainsicu.ru
