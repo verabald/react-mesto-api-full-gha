@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 require('dotenv').config();
 
-const JWT_SECRET = process.env;
+const JWT_SECRET = process.env || 'secret';
 
 const NotFoundError = require('../status/NotFoundError');
 const ConflictError = require('../status/ConflictError');
