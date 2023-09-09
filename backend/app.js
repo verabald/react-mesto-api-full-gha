@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const { rateLimit } = require('express-rate-limit');
 const { errors, celebrate, Joi } = require('celebrate');
+const cors = require('./middlewares/cors');
 const { regExp } = require('./constants/constants');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -43,6 +44,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
+
+app.use(cors);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
