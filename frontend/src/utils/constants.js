@@ -9,7 +9,7 @@ const validationConfig = {
 const apiOptions = {
         url: 'https://backend.verbaldi.nomoredomainsicu.ru',
         headers: {
-          authorization: '4e14d5ac-b5a8-4129-9bd2-ef7c1e4423e4',
+          authorization: `Bearer ${localStorage.getItem('jwt')}`,
           'Content-Type': 'application/json'
         }
 };
