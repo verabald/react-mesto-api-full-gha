@@ -54,7 +54,7 @@ app.get('/crash-test', () => {
 });
 
 app.post(
-  '/signin',
+  '/sign-in',
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
@@ -64,7 +64,7 @@ app.post(
   login,
 );
 app.post(
-  '/signup',
+  '/sign-up',
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
