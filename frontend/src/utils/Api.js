@@ -2,7 +2,6 @@ class Api {
   constructor() {
     this._url = 'https://backend.verbaldi.nomoredomainsicu.ru';
     this._headers = 'application/json';
-    this._authorization = `Bearer ${localStorage.getItem('jwt')}`;
   }
 
   _request(url, options) {
@@ -16,20 +15,20 @@ class Api {
     return Promise.reject(`Что-то пошло не так: ${res.status}`);
   }
 
-  getInitialCards() {
+  getInitialCards(token) {
     return this._request(`${this._url}/cards`, {
       headers: {
-        'Authorization': this._authorization,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': this._headers,
     },
     });
   }
 
-  addCard(card) {
+  addCard(card, token) {
     return this._request(`${this._url}/cards`, {
       method: "POST",
       headers: {
-        'Authorization': this._authorization,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': this._headers,
     },
       body: JSON.stringify({
@@ -39,40 +38,40 @@ class Api {
     });
   }
 
-  deleteCard(id) {
+  deleteCard(id, token) {
     return this._request(`${this._url}/cards/${id}`, {
       method: "DELETE",
       headers: {
-        'Authorization': this._authorization,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': this._headers,
     },
     });
   }
 
-  changeLikeCardStatus(id, isLiked) {
+  changeLikeCardStatus(id, isLiked, token) {
     return this._request(`${this._url}/cards/${id}/likes`, {
       method: isLiked ? "PUT" : "DELETE",
       headers: {
-        'Authorization': this._authorization,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': this._headers,
     },
     });
   }
 
-  getUserInfoApi() {
+  getUserInfoApi(token) {
     return this._request(`${this._url}/users/me`, {
       headers: {
-        'Authorization': this._authorization,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': this._headers,
     },
     });
   }
 
-  setUserInfoApi(data) {
+  setUserInfoApi(data, token) {
     return this._request(`${this._url}/users/me`, {
       method: "PATCH",
       headers: {
-        'Authorization': this._authorization,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': this._headers,
     },
       body: JSON.stringify({
@@ -82,11 +81,11 @@ class Api {
     });
   }
 
-  setAvatar(data) {
+  setAvatar(data, token) {
     return this._request(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: {
-        'Authorization': this._authorization,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': this._headers,
     },
       body: JSON.stringify({
