@@ -1,10 +1,8 @@
-import { apiOptions } from "./constants.js";
-
 class Api {
-  constructor(options) {
-    this._url = options.url;
-    this._headers = options.headers;
-    this._authorization = options.headers["authorization"];
+  constructor() {
+    this._url = 'https://backend.verbaldi.nomoredomainsicu.ru';
+    this._headers = 'application/json';
+    this._authorization = `Bearer ${localStorage.getItem('jwt')}`;
   }
 
   _request(url, options) {
@@ -81,5 +79,5 @@ class Api {
   }
 }
 
-const api = new Api(apiOptions);
+const api = new Api();
 export default api;
