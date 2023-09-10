@@ -43,9 +43,6 @@ export default function Main({onEditAvatar, onEditProfile, onAddPlace, cards, on
             <Card
               card={card}
               key={card._id}
-              name={card.name}
-              link={card.link}
-              likes={card.likes.length}
               onCardClick={onCardClick}
               onCardLike={onCardLike}
               onCardDelete={onCardDelete}
