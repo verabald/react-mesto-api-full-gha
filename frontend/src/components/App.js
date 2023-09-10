@@ -35,24 +35,25 @@ function App() {
     email: "",
     password: "",
   });
+  const [currentToken, setCurrentToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
-    Promise.all([api.getInitialCards(), api.getUserInfoApi()])
+    if (signIn && currentToken) {
+    Promise.all([api.getInitialCards(currentToken), api.getUserInfoApi(currentToken)])
       .then((res) => {
         const [card, user] = res;
         setCards(card);
         setCurrentUser(user);
       })
       .catch(console.error);
-
+    };
     checkToken();
-  }, []);
+  }, [signIn, currentToken]);
 
   function checkToken() {
-    if (localStorage.getItem("token")) {
-      const jwt = localStorage.getItem("token");
+    if (currentToken) {
       auth
-        .checkToken(jwt)
+        .checkToken(currentToken)
         .then((data) => {
           setSignIn(true);
           setEmail(data.data.email);
@@ -80,6 +81,7 @@ function App() {
 
   function handleSignIn(login) {
     setSignIn(login);
+    setCurrentToken('');
   }
 
   function closeAllPopups() {
@@ -98,7 +100,7 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     function makeRequest() {
-      return api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+      return api.changeLikeCardStatus(card._id, !isLiked, currentToken).then((newCard) => {
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard : c))
         );
@@ -109,7 +111,7 @@ function App() {
 
   function handleCardDelete(card) {
     function makeRequest() {
-      return api.deleteCard(card._id).then(() => {
+      return api.deleteCard(card._id, currentToken).then(() => {
         setCards((cards) => cards.filter((c) => c._id !== card._id));
       });
     }
@@ -118,7 +120,7 @@ function App() {
 
   function handleUpdateUser(user) {
     function makeRequest() {
-      return api.setUserInfoApi(user).then((res) => {
+      return api.setUserInfoApi(user, currentToken).then((res) => {
         setCurrentUser(res);
       });
     }
@@ -127,7 +129,7 @@ function App() {
 
   function handleUpdateAvatar(avatar) {
     function makeRequest() {
-      return api.setAvatar(avatar).then((res) => {
+      return api.setAvatar(avatar, currentToken).then((res) => {
         setCurrentUser(res);
       });
     }
@@ -136,7 +138,7 @@ function App() {
 
   function handleAddPlaceSubmit(card) {
     function makeRequest() {
-      return api.addCard(card).then((res) => {
+      return api.addCard(card, currentToken).then((res) => {
         setCards([res, ...cards]);
       });
     }
