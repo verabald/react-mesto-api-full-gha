@@ -32,19 +32,19 @@ export default function Card(props) {
       )}
       <img
         className="elements__image"
-        src={props.link}
-        alt={props.name}
+        src={props.card.link}
+        alt={props.card.name}
         onClick={handleClick}
       />
       <div className="elements__box">
-        <h2 className="elements__caption">{props.name}</h2>
+        <h2 className="elements__caption">{props.card.name}</h2>
         <div className="elements__box-like">
           <button
             className={cardLikeButtonClassName}
             type="button"
             onClick={handleLikeClick}
           />
-          <p className="elements__like-counter">{props.likes}</p>
+          <p className="elements__like-counter">{props.card.likes.length}</p>
         </div>
       </div>
     </div>
