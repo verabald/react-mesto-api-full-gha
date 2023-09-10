@@ -139,7 +139,7 @@ function App() {
   function handleAddPlaceSubmit(card) {
     function makeRequest() {
       return api.addCard(card, currentToken).then((res) => {
-        setCards([res, ...cards]);
+        setCards([res.data, ...cards]);
       });
     }
     handleSubmit(makeRequest);
