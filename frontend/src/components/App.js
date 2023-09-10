@@ -102,7 +102,7 @@ function App() {
     function makeRequest() {
       return api.changeLikeCardStatus(card._id, !isLiked, currentToken).then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
+          state.map((c) => (c._id === card._id ? newCard.data : c))
         );
       });
     }
