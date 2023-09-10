@@ -43,7 +43,7 @@ function App() {
       .then((res) => {
         const [card, user] = res;
         setCards(card.data);
-        setCurrentUser(user);
+        setCurrentUser(user.data);
       })
       .catch(console.error);
     };
