@@ -42,7 +42,7 @@ function App() {
     Promise.all([api.getInitialCards(currentToken), api.getUserInfoApi(currentToken)])
       .then((res) => {
         const [card, user] = res;
-        setCards(card);
+        setCards(card.data);
         setCurrentUser(user);
       })
       .catch(console.error);

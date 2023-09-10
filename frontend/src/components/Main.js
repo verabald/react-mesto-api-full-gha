@@ -39,7 +39,7 @@ export default function Main({onEditAvatar, onEditProfile, onAddPlace, cards, on
 
       <section className="elements" aria-label="Галерея картинок">
         <ul className="elements__list">
-          {cards.data.map((card) => (
+          {cards.map((card) => (
             <Card
               card={card}
               key={card._id}
