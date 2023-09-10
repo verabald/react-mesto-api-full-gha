@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
@@ -23,8 +24,6 @@ const { PORT = 3000, URL = 'mongodb://127.0.0.1/mestodb' } = process.env;
 
 const app = express();
 
-require('dotenv').config();
-
 mongoose.connect(URL);
 
 app.use(express.json());
@@ -38,12 +37,11 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
+app.use(requestLogger);
 app.use(limiter);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(requestLogger);
 
 app.use(cors);
 

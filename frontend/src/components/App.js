@@ -81,7 +81,6 @@ function App() {
 
   function handleSignIn(login) {
     setSignIn(login);
-    setCurrentToken('');
   }
 
   function closeAllPopups() {

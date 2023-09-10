@@ -67,13 +67,7 @@ function putLike(req, res, next) {
 
       return next(new NotFoundError('Передан несуществующий _id карточки'));
     })
-    .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
-        next(new BadRequestError('Переданы некорректные данные'));
-      }
-
-      next(err);
-    });
+    .catch(next);
 }
 
 function deleteLike(req, res, next) {
@@ -89,13 +83,7 @@ function deleteLike(req, res, next) {
 
       return next(new NotFoundError('Передан несуществующий _id карточки'));
     })
-    .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
-        next(new BadRequestError('Переданы некорректные данные'));
-      }
-
-      next(err);
-    });
+    .catch(next);
 }
 
 module.exports = {

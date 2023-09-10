@@ -109,9 +109,7 @@ function setInfo(req, res, next) {
       throw new NotFoundError('Пользователь с указанным _id не найден');
     })
     .catch((err) => {
-      if (err.message === 'NotFoundError') {
-        next(new NotFoundError('Пользователь с указанным _id не найден'));
-      } else if (err.name === 'CastError') {
+      if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные'));
       } else {
         next(err);
