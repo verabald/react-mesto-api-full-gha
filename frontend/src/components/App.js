@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Route, Routes, useNavigate, Link } from "react-router-dom";
-import "../index.css";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import Header from "./Header.js";
-import Main from "./Main.js";
-import Footer from "./Footer.js";
-import EditProfilePopup from "./EditProfilePopup.js";
-import EditAvatarPopup from "./EditAvatarPopup.js";
-import AddPlacePopup from "./AddPlacePopup.js";
-import ImagePopup from "./ImagePopup.js";
-import Register from "./Register.js";
-import Login from "./Login.js";
-import InfoTooltip from "./InfoTooltip.js";
-import ProtectedRoute from "./ProtectedRoute.js";
-import api from "../utils/Api.js";
-import auth from "../utils/Auth.js";
+import React, { useState, useEffect } from 'react';
+import { Route, Routes, useNavigate, Link } from 'react-router-dom';
+import '../index.css';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import Header from './Header.js';
+import Main from './Main.js';
+import Footer from './Footer.js';
+import EditProfilePopup from './EditProfilePopup.js';
+import EditAvatarPopup from './EditAvatarPopup.js';
+import AddPlacePopup from './AddPlacePopup.js';
+import ImagePopup from './ImagePopup.js';
+import Register from './Register.js';
+import Login from './Login.js';
+import InfoTooltip from './InfoTooltip.js';
+import ProtectedRoute from './ProtectedRoute.js';
+import api from '../utils/Api.js';
+import auth from '../utils/Auth.js';
 
 function App() {
   const navigate = useNavigate();
@@ -30,24 +30,32 @@ function App() {
 
   const [authCheck, setAuthCheck] = useState(false);
   const [signIn, setSignIn] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [values, setValue] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-  const [currentToken, setCurrentToken] = useState(localStorage.getItem('token'));
+  const [currentToken, setCurrentToken] = useState(
+    localStorage.getItem('token')
+  );
+
+  useEffect(() => {
+    checkToken();
+  }, []);
 
   useEffect(() => {
     if (signIn && currentToken) {
-    Promise.all([api.getInitialCards(currentToken), api.getUserInfoApi(currentToken)])
-      .then((res) => {
-        const [card, user] = res;
-        setCards(card.data);
-        setCurrentUser(user.data);
-      })
-      .catch(console.error);
-    };
-    checkToken();
+      Promise.all([
+        api.getInitialCards(currentToken),
+        api.getUserInfoApi(currentToken),
+      ])
+        .then((res) => {
+          const [card, user] = res;
+          setCards(card.data.reverse());
+          setCurrentUser(user.data);
+        })
+        .catch(console.error);
+    }
   }, [signIn, currentToken]);
 
   function checkToken() {
@@ -56,8 +64,8 @@ function App() {
         .checkToken(currentToken)
         .then((data) => {
           setSignIn(true);
-          setEmail(data.data.email);
-          navigate("/", { replace: true });
+          setEmail(data.email);
+          navigate('/', { replace: true });
         })
         .catch(console.error);
     }
@@ -99,11 +107,13 @@ function App() {
     const isLiked = card.likes.some((i) => i === currentUser._id);
 
     function makeRequest() {
-      return api.changeLikeCardStatus(card._id, !isLiked, currentToken).then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard.data : c))
-        );
-      });
+      return api
+        .changeLikeCardStatus(card._id, !isLiked, currentToken)
+        .then((newCard) => {
+          setCards((state) =>
+            state.map((c) => (c._id === card._id ? newCard.data : c))
+          );
+        });
     }
     handleSubmit(makeRequest);
   }
@@ -156,7 +166,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header userEmail={email} onLogin={handleSignIn} />
+        <Header userEmail={email} onLogin={handleSignIn} onExit={setCurrentToken} />
 
         <Routes>
           <Route

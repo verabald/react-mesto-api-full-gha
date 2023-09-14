@@ -3,15 +3,14 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 
 export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
-  const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
+  const currentUser = useContext(CurrentUserContext);
+
   useEffect(() => {
-    if (currentUser) {
       setName(currentUser.name);
       setDescription(currentUser.about);
-    }
   }, [currentUser, isOpen]);
 
   function handleChangeName(evt) {
@@ -22,9 +21,7 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     setDescription(evt.target.value);
   }
 
-  function handleSubmit(evt) {
-    evt.preventDefault();
-
+  function handleSubmit() {
     onUpdateUser({
       name,
       about: description,

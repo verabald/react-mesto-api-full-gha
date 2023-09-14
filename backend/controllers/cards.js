@@ -5,7 +5,7 @@ const BadRequestError = require('../status/BadRequestError');
 const { STATUS_CREATED } = require('../status/status');
 
 function getCard(req, res, next) {
-  Card.find({})
+  Card.find({}).sort({ createdAt: -1 })
     .then((cards) => res.send({ data: cards }))
     .catch(next);
 }

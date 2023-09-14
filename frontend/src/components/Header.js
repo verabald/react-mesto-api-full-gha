@@ -2,13 +2,14 @@ import logo from "../images/header-logo.svg";
 import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
-export default function Header({ userEmail, onLogin }) {
+export default function Header({ userEmail, onLogin, onExit }) {
   const path = useLocation();
   const navigate = useNavigate();
 
   function exit() {
     localStorage.removeItem("token");
     onLogin(false);
+    onExit('');
     navigate("/sign-in", { replace: true });
   }
 

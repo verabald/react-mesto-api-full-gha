@@ -15,9 +15,7 @@ export default function Login({
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
 
-  function onLog(evt) {
-    evt.preventDefault();
-
+  function onLog() {
     auth
       .getLogin(values)
       .then((data) => {
@@ -27,8 +25,6 @@ export default function Login({
         setPassword(values.password);
         setValue({ email: "", password: "" });
         navigate("/", { replace: true });
-        setAuthCheck(true);
-        isOpen(true);
       })
       .catch(() => {
         setAuthCheck(false);

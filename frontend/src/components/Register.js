@@ -20,12 +20,12 @@ export default function Register({
     auth
       .getRegister(values)
       .then((data) => {
-        setEmail(data.data.email);
+        setEmail(data.email);
         setPassword(values.password);
         setValue({ email: "", password: "" });
-        navigate("/sign-in", { replace: true });
         setAuthCheck(true);
         isOpen(true);
+        navigate("/sign-in", { replace: true });
       })
       .catch(() => {
         setAuthCheck(false);
