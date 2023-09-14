@@ -15,7 +15,9 @@ export default function Login({
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
 
-  function onLog() {
+  function onLog(evt) {
+    evt.preventDefault();
+
     auth
       .getLogin(values)
       .then((data) => {

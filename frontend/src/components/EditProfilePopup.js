@@ -21,7 +21,9 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     setDescription(evt.target.value);
   }
 
-  function handleSubmit() {
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    
     onUpdateUser({
       name,
       about: description,
