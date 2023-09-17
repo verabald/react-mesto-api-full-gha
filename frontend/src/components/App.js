@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate, Link } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import '../index.css';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header.js';
@@ -131,7 +131,7 @@ function App() {
   function handleUpdateUser(user) {
     function makeRequest() {
       return api.setUserInfoApi(user, currentToken).then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
       });
     }
     handleSubmit(makeRequest);
@@ -140,7 +140,7 @@ function App() {
   function handleUpdateAvatar(avatar) {
     function makeRequest() {
       return api.setAvatar(avatar, currentToken).then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
       });
     }
     handleSubmit(makeRequest);
@@ -213,6 +213,9 @@ function App() {
                 signIn={signIn}
               />
             }
+          />
+          <Route
+              element={signIn ? <Navigate to="/" /> : <Navigate to="/sign-up" />}
           />
         </Routes>
 
