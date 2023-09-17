@@ -44,6 +44,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    setCurrentToken(localStorage.getItem('token'))
     if (signIn && currentToken) {
       Promise.all([
         api.getInitialCards(currentToken),
@@ -51,7 +52,7 @@ function App() {
       ])
         .then((res) => {
           const [card, user] = res;
-          setCards(card.data.reverse());
+          setCards(card.data);
           setCurrentUser(user.data);
         })
         .catch(console.error);
