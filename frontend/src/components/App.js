@@ -65,7 +65,7 @@ function App() {
         .checkToken(currentToken)
         .then((data) => {
           setSignIn(true);
-          setEmail(data.email);
+          setEmail(data.data.email);
           navigate('/', { replace: true });
         })
         .catch(console.error);
@@ -140,7 +140,7 @@ function App() {
   function handleUpdateAvatar(avatar) {
     function makeRequest() {
       return api.setAvatar(avatar, currentToken).then((res) => {
-        setCurrentUser(res.data);
+        setCurrentUser(res);
       });
     }
     handleSubmit(makeRequest);
